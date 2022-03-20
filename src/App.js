@@ -5,6 +5,7 @@ import { SchoolsContextProvider } from "./context/CampusContext";
 
 import Navbar from "./components/Navbar";
 import Home from "./routes/Home";
+import SchoolDetail from "./routes/SchoolDetail";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
               exact
               path="/"
               element={<Home />} />
+            <Route
+              path="/schools/:id"
+              element={<SchoolDetail />} />
           </Routes>
         </Router>
       </div>

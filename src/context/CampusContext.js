@@ -7,12 +7,15 @@ export const SchoolsContext = createContext();
 // Wrapped around App so all Components have access to these states
 export const SchoolsContextProvider = props => {
     const [schools, setSchools] = useState([]);
+    const [selectedSchool, setSelectedSchool] = useState(null);
 
     return (
         <SchoolsContext.Provider
             value={{
                 schools,
                 setSchools,
+                selectedSchool,
+                setSelectedSchool
             }}>
             {props.children}
         </SchoolsContext.Provider>

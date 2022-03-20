@@ -1,11 +1,12 @@
 import React, { useEffect, useContext } from 'react';
 import { SchoolsContext } from '../context/CampusContext';
 import SchoolFinder from "../api/SchoolFinder";
-
-
+import { useNavigate } from "react-router-dom";
 
 function SchoolList() {
     const { schools, setSchools } = useContext(SchoolsContext);
+    let navigate = useNavigate();
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -13,7 +14,8 @@ function SchoolList() {
                 const response = await SchoolFinder.get("/")
                 // Store school list in state
                 console.log(response)
-                // setSchools(response.data.data.restaurants);
+                setSchools(response.data.data.schools);
+                console.log(schools)
             } catch (err) {
                 console.log('ERROR: ', err)
             }
@@ -21,6 +23,15 @@ function SchoolList() {
 
         fetchData();
     }, [])
+
+    const handleSchoolSelect = (id) => {
+        try {
+            // Navigate to detail page
+            navigate(`/schools/${id}`);
+        } catch (err) {
+            console.log('ERROR: ', err);
+        }
+    };
 
     return (
         <div className="list-group">
@@ -32,13 +43,16 @@ function SchoolList() {
                 </thead>
                 <tbody>
                     {/* && Means will only render if schools exists */}
-                    {/* {schools && schools.map(school => {
+                    {schools && schools.map(school => {
                         return (
-                            <tr key={school.id}>
+                            <tr
+                                onClick={() => { handleSchoolSelect(school.id) }}
+                                key={school.id}
+                            >
                                 <td>{school.name}</td>
                             </tr>
                         )
-                    })} */}
+                    })}
                 </tbody>
             </table>
         </div>
