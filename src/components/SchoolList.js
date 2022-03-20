@@ -13,11 +13,9 @@ function SchoolList() {
                 // Get all schools from server
                 const response = await SchoolFinder.get("/")
                 // Store school list in state
-                console.log(response)
                 setSchools(response.data.data.schools);
-                console.log(schools)
             } catch (err) {
-                console.log('ERROR: ', err)
+                console.log(err)
             }
         };
 
@@ -29,7 +27,7 @@ function SchoolList() {
             // Navigate to detail page
             navigate(`/schools/${id}`);
         } catch (err) {
-            console.log('ERROR: ', err);
+            console.log(err);
         }
     };
 
@@ -49,7 +47,7 @@ function SchoolList() {
                                 onClick={() => { handleSchoolSelect(school.id) }}
                                 key={school.id}
                             >
-                                <td>{school.name}</td>
+                                <td style={{ cursor: "pointer" }}>{school.name}</td>
                             </tr>
                         )
                     })}

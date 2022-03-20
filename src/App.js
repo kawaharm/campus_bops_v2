@@ -6,6 +6,7 @@ import { SchoolsContextProvider } from "./context/CampusContext";
 import Navbar from "./components/Navbar";
 import Home from "./routes/Home";
 import SchoolDetail from "./routes/SchoolDetail";
+import CategoryBracket from "./routes/CategoryBracket";
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
             <Route
               path="/schools/:id"
               element={<SchoolDetail />} />
+            <Route
+              path="/categories/:id/"
+              element={<CategoryBracket />} />
           </Routes>
         </Router>
       </div>

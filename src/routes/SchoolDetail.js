@@ -13,7 +13,6 @@ function SchoolDetail(props) {
             try {
                 const response = await SchoolFinder.get(`/${id}`);
                 setSelectedSchool(response.data);
-                console.log(response.data.categories)
             } catch (err) {
                 console.log('ERROR: ', err);
             }
@@ -27,7 +26,7 @@ function SchoolDetail(props) {
             {selectedSchool && (
                 <>
                     <h1 className="text-center display-1">{selectedSchool.school.name}</h1>
-                    <div className="mt-3">
+                    <div className="mt-3" style={{ cursor: "pointer" }}>
                         <Categories categories={selectedSchool.categories} />
                     </div>
                 </>
