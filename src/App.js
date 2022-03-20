@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import Home from "./routes/Home";
 import SchoolDetail from "./routes/SchoolDetail";
 import CategoryBracket from "./routes/CategoryBracket";
+import SongSearch from "./routes/SongSearch";
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
             <Route
               path="/categories/:id/"
               element={<CategoryBracket />} />
+            <Route
+              path="/search"
+              element={<SongSearch />} />
           </Routes>
         </Router>
       </div>

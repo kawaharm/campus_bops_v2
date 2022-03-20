@@ -26,7 +26,7 @@ function SchoolDetail(props) {
             {selectedSchool && (
                 <>
                     <h1 className="text-center display-1">{selectedSchool.school.name}</h1>
-                    <div className="mt-3" style={{ cursor: "pointer" }}>
+                    <div className="mt-3">
                         <Categories categories={selectedSchool.categories} />
                     </div>
                 </>

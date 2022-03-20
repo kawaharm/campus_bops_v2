@@ -8,6 +8,7 @@ export const SchoolsContext = createContext();
 export const SchoolsContextProvider = props => {
     const [schools, setSchools] = useState([]);
     const [selectedSchool, setSelectedSchool] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState(null);
 
     return (
         <SchoolsContext.Provider
@@ -15,7 +16,9 @@ export const SchoolsContextProvider = props => {
                 schools,
                 setSchools,
                 selectedSchool,
-                setSelectedSchool
+                setSelectedSchool,
+                selectedCategory,
+                setSelectedCategory
             }}>
             {props.children}
         </SchoolsContext.Provider>

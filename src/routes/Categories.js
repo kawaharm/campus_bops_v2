@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
+import { SchoolsContext } from '../context/CampusContext';
 
 
 function Categories({ categories }) {
     let navigate = useNavigate();
+    const { selectedCategory, setSelectedCategory } = useContext(SchoolsContext);
 
-    const handleCategorySelect = (id) => {
+
+    const handleCategorySelect = (category) => {
         try {
+            setSelectedCategory(category);
             // Navigate to detail page
-            navigate(`/categories/${id}`);
+            navigate(`/categories/${category.id}`);
         } catch (err) {
             console.log(err);
         }
@@ -21,9 +25,9 @@ function Categories({ categories }) {
                     <div
                         key={category.id}
                         className="card text-white bg-primary mb-3 me-4"
-                        style={{ maxWidth: "30%" }}>
+                        style={{ maxWidth: "30%", cursor: "pointer" }}>
                         <div className="card-header d-flex justify-content-between">
-                            <span onClick={() => { handleCategorySelect(category.id) }}>{category.name}</span>
+                            <span onClick={() => { handleCategorySelect(category) }}>{category.name}</span>
                         </div>
                     </div>
                 )
