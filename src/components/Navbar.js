@@ -18,7 +18,7 @@ function Navbar() {
                         <a className="nav-link" href="#">Schools</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Search</a>
+                        <a className="nav-link" href="/search">Search</a>
                     </li>
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

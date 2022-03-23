@@ -10,6 +10,7 @@ function SongSearch() {
     const [searchResults, setSearchResults] = useState([]);
     const [categories, setCategories] = useState([]);
     const [selectedSong, setSelectedSong] = useState(null);
+    const { selectedCategory, setSelectedCategory } = useContext(SchoolsContext);
     const { schools, setSchools } = useContext(SchoolsContext);
     const navigate = useNavigate();
 
@@ -43,13 +44,10 @@ function SongSearch() {
         }
     }
 
-    const handleSchoolSelect = async (id, index, result) => {
+    const handleSchoolSelect = async (id) => {
         try {
             const selectedSchool = await SchoolFinder.get(`/${id}`);
             setCategories(selectedSchool.data.categories);
-            console.log('RESULT FROM SCHOOL SELECT: ', result)
-            console.log('INDEX FROM SCHOOL SELECT: ', index)
-            console.log('SELECTED SONG ', selectedSong)
 
         } catch (err) {
             console.log(err)
@@ -59,8 +57,7 @@ function SongSearch() {
     const handleAddSongToCategory = async (e, id) => {
         e.stopPropagation();
         try {
-            const selectedCategory = await CategoryFinder.post(`/${id}/addSong`, {
-                // CategoryId: id,
+            const newSong = await CategoryFinder.post(`/${id}/addSong`, {
                 title: selectedSong.title,
                 artist: selectedSong.artist,
                 album: selectedSong.album,
@@ -141,7 +138,7 @@ function SongSearch() {
                                                             return (
                                                                 <li
                                                                     key={school.id}
-                                                                    onClick={() => handleSchoolSelect(school.id, result.id, resultArray)}
+                                                                    onClick={() => handleSchoolSelect(school.id)}
                                                                     className="dropdown-item"
                                                                     style={{ cursor: "pointer" }}
                                                                 >{school.name}</li>
@@ -154,7 +151,7 @@ function SongSearch() {
                                                         return (
                                                             <button
                                                                 key={category.id}
-                                                                onClick={(e) => handleAddSongToCategory(e, category.id, result)}
+                                                                onClick={(e) => handleAddSongToCategory(e, category.id)}
                                                                 class="btn btn-primary mb-3 mx-2"
                                                                 type="button"
                                                             >{category.name}</button>

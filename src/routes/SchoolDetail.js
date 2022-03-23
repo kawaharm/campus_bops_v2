@@ -12,6 +12,7 @@ function SchoolDetail(props) {
         const fetchData = async () => {
             try {
                 const response = await SchoolFinder.get(`/${id}`);
+                console.log(response)
                 setSelectedSchool(response.data);
             } catch (err) {
                 console.log('ERROR: ', err);
