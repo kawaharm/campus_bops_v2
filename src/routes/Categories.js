@@ -11,7 +11,7 @@ function Categories({ categories }) {
     const handleCategorySelect = (category) => {
         try {
             setSelectedCategory(category);
-            // Navigate to detail page
+            // Navigate to Category Bracket
             navigate(`/categories/${category.id}`);
         } catch (err) {
             console.log(err);

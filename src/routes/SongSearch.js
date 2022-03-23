@@ -1,12 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import SchoolFinder from '../api/SchoolFinder';
 import SongFinder from '../api/SongFinder';
-
+import CategoryFinder from '../api/CategoryFinder';
+import { SchoolsContext } from '../context/CampusContext';
 
 function SongSearch() {
     const [title, setTitle] = useState("");
-    const [artist, setArtist] = useState("");
-    const [album, setAlbum] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [selectedSong, setSelectedSong] = useState(null);
+    const { schools, setSchools } = useContext(SchoolsContext);
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // Get all schools from server
+                const response = await SchoolFinder.get("/")
+                // Store school list in state
+                setSchools(response.data.data.schools);
+            } catch (err) {
+                console.log(err)
+            }
+        };
+
+        fetchData();
+    }, [])
 
 
     const handleSongSearch = async (e) => {
@@ -19,6 +40,37 @@ function SongSearch() {
             setSearchResults(searchedSong.data.song);
         } catch (err) {
             console.log(err);
+        }
+    }
+
+    const handleSchoolSelect = async (id, index, result) => {
+        try {
+            const selectedSchool = await SchoolFinder.get(`/${id}`);
+            setCategories(selectedSchool.data.categories);
+            console.log('RESULT FROM SCHOOL SELECT: ', result)
+            console.log('INDEX FROM SCHOOL SELECT: ', index)
+            console.log('SELECTED SONG ', selectedSong)
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const handleAddSongToCategory = async (e, id) => {
+        e.stopPropagation();
+        try {
+            const selectedCategory = await CategoryFinder.post(`/${id}/addSong`, {
+                // CategoryId: id,
+                title: selectedSong.title,
+                artist: selectedSong.artist,
+                album: selectedSong.album,
+                albumCover: selectedSong.albumCover,
+                songPlayerId: selectedSong.songPlayerId
+            });
+            // Navigate to category page
+            navigate(`/categories/${id}`);
+        } catch (err) {
+            console.log(err)
         }
     }
 
@@ -41,7 +93,7 @@ function SongSearch() {
                     className="btn btn-primary">Search</button>
             </form>
             <div className="row row-cols-3 mb-2">
-                {searchResults && searchResults.map(result => {
+                {searchResults && searchResults.map((result, index, resultArray) => {
                     return (
                         <div
                             key={result.id}
@@ -62,10 +114,61 @@ function SongSearch() {
                                         allow="encrypted-media" />
                                 </div>
                                 <button
-                                    onClick={handleSubmit}
-                                    type="submit"
-                                    className="btn btn-primary px-3"
-                                    style={{ width: "30%" }}>Add</button>
+                                    onClick={() => { setSelectedSong(result) }}
+                                    type="button"
+                                    class="btn btn-primary"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    Add To Category
+                                </button>
+
+                                {/* Add To Category Modal */}
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title text-dark" id="exampleModalLabel">Select Category</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                {/* Dropdown for School */}
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Select School
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        {schools && schools.map(school => {
+                                                            return (
+                                                                <li
+                                                                    key={school.id}
+                                                                    onClick={() => handleSchoolSelect(school.id, result.id, resultArray)}
+                                                                    className="dropdown-item"
+                                                                    style={{ cursor: "pointer" }}
+                                                                >{school.name}</li>
+                                                            )
+                                                        })}
+                                                    </ul>
+                                                </div>
+                                                <div class="row row-cols-4 my-4">
+                                                    {categories && categories.map(category => {
+                                                        return (
+                                                            <button
+                                                                key={category.id}
+                                                                onClick={(e) => handleAddSongToCategory(e, category.id, result)}
+                                                                class="btn btn-primary mb-3 mx-2"
+                                                                type="button"
+                                                            >{category.name}</button>
+                                                        )
+                                                    })}
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     )
