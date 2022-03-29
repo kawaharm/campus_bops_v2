@@ -15,6 +15,7 @@ function CategoryBracket(props) {
                 const response = await CategoryFinder.get(`/${id}`);
                 setCategory(response.data.data.category);
                 setSongs(response.data.data.songs);
+                console.log(songs)
             } catch (err) {
                 console.log('ERROR: ', err);
             }
@@ -37,14 +38,14 @@ function CategoryBracket(props) {
 
                 <div className="tournament-brackets">
                     <ul className="bracket bracket-1">
-                        <li className="team-item">Hello <span>vs</span> C2</li>
-                        <li className="team-item">D1 <span>vs</span> 3BEF</li>
-                        <li className="team-item">B1 <span>vs</span> 3ACD</li>
-                        <li className="team-item">F1 <span>vs</span> E2</li>
-                        <li className="team-item">C1 <span>vs</span> 3ABF</li>
-                        <li className="team-item">E1 <span>vs</span> D2</li>
-                        <li className="team-item">A1 <span>vs</span> 3CDE</li>
-                        <li className="team-item">B2 <span>vs</span> F2</li>
+                        <li className="team-item">#1 - {songs[0] && songs[0].title}</li>
+                        <li className="team-item">#8 - {songs[1] && songs[1].title}</li>
+                        <li className="team-item">#4 - {songs[2] && songs[2].title}</li>
+                        <li className="team-item">#5 - {songs[3] && songs[3].title}</li>
+                        <li className="team-item">#3 - {songs[4] && songs[4].title}</li>
+                        <li className="team-item">#6 - {songs[5] && songs[5].title}</li>
+                        <li className="team-item">#2 - {songs[6] && songs[0].title}</li>
+                        <li className="team-item">#7 - {songs[7] && songs[7].title}</li>
                     </ul>
                     <ul className="bracket bracket-2">
                         <li className="team-item">QF1 <span>vs</span> QF2</li>

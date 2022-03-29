@@ -13,23 +13,6 @@ body {
   background: white;
 }
 
-.navbar {
-  background: #144ac8;
-}
-
-.navbar-item {
-  color: ghostwhite;
-  border: 1px solid rgb(195, 221, 227);
-  border-radius: 5px;
-  padding: 2px 20px;
-  margin: 2px;
-  font-family: Helvetica;
-  font-size: 20px;
-  text-decoration: none;  /* To remove underline */
-}
-
-.tournament-container {}
-
 .tournament-headers {
   flex-grow: 1;
   display: flex;
