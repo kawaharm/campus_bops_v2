@@ -4,7 +4,7 @@ function Header() {
     return (
         <>
             <h1 className="font-weight-light display-1 text-center">
-                Campus Bops
+                Welcome To Campus Bops!
             </h1>
         </>
     )

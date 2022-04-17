@@ -10,6 +10,10 @@ export const SchoolsContextProvider = props => {
     const [selectedSchool, setSelectedSchool] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState(null);
 
+    const addSchool = (school) => {
+        setSchools([...schools, school]);
+    };
+
     return (
         <SchoolsContext.Provider
             value={{
@@ -18,7 +22,8 @@ export const SchoolsContextProvider = props => {
                 selectedSchool,
                 setSelectedSchool,
                 selectedCategory,
-                setSelectedCategory
+                setSelectedCategory,
+                addSchool
             }}>
             {props.children}
         </SchoolsContext.Provider>

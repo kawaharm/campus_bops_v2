@@ -113,27 +113,27 @@ function SongSearch() {
                                 <button
                                     onClick={() => { setSelectedSong(result) }}
                                     type="button"
-                                    class="btn btn-primary"
+                                    className="btn btn-primary"
                                     data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">
                                     Add To Category
                                 </button>
 
                                 {/* Add To Category Modal */}
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title text-dark" id="exampleModalLabel">Select Category</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div className="modal-dialog modal-dialog-centered">
+                                        <div className="modal-content">
+                                            <div className="modal-header">
+                                                <h5 className="modal-title text-dark" id="exampleModalLabel">Select Category</h5>
+                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div className="modal-body">
                                                 {/* Dropdown for School */}
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <div className="btn-group">
+                                                    <button type="button" className="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                                         Select School
                                                     </button>
-                                                    <ul class="dropdown-menu">
+                                                    <ul className="dropdown-menu">
                                                         {schools && schools.map(school => {
                                                             return (
                                                                 <li
@@ -146,22 +146,22 @@ function SongSearch() {
                                                         })}
                                                     </ul>
                                                 </div>
-                                                <div class="row row-cols-4 my-4">
+                                                <div className="row row-cols-4 my-4">
                                                     {categories && categories.map(category => {
                                                         return (
                                                             <button
                                                                 key={category.id}
                                                                 onClick={(e) => handleAddSongToCategory(e, category.id)}
-                                                                class="btn btn-primary mb-3 mx-2"
+                                                                className="btn btn-primary mb-3 mx-2"
                                                                 type="button"
                                                             >{category.name}</button>
                                                         )
                                                     })}
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            <div className="modal-footer">
+                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" className="btn btn-primary">Save changes</button>
                                             </div>
                                         </div>
                                     </div>
