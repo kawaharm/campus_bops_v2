@@ -1,5 +1,6 @@
 import axios from "axios";
+require("dotenv").config();
 
 export default axios.create({
-    baseURL: "http://localhost:3005/api/v1/schools"
-})
+  baseURL: `${process.env.REACT_SERVER}/schools`,
+});
