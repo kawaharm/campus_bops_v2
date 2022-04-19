@@ -1,7 +1,6 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { SchoolsContextProvider } from "./context/CampusContext";
-
 
 import Navbar from "./components/Navbar";
 import Home from "./routes/Home";
@@ -14,26 +13,15 @@ function App() {
   return (
     <SchoolsContextProvider>
       {/* container class will give page side margins */}
-      <Navbar />
       <div className="container">
         <Router>
+          <Navbar />
           <Routes>
-            <Route
-              exact
-              path="/"
-              element={<Home />} />
-            <Route
-              path="/schools/"
-              element={<Schools />} />
-            <Route
-              path="/schools/:id"
-              element={<SchoolDetail />} />
-            <Route
-              path="/categories/:id/"
-              element={<CategoryBracket />} />
-            <Route
-              path="/search"
-              element={<SongSearch />} />
+            <Route exact path="/" element={<Home />} />
+            <Route path="/schools/" element={<Schools />} />
+            <Route path="/schools/:id" element={<SchoolDetail />} />
+            <Route path="/categories/:id/" element={<CategoryBracket />} />
+            <Route path="/search" element={<SongSearch />} />
           </Routes>
         </Router>
       </div>
