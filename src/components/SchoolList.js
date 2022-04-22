@@ -16,7 +16,9 @@ function SchoolList() {
         // // Store school list in state
         // setSchools(response.data.data.schools);
 
-        const response = await axios.get("test");
+        const response = await axios.get(
+          "https://campus-bops-server.herokuapp.com/test"
+        );
         console.log("RESPONSE TEST: ", response);
       } catch (err) {
         console.log(err);
